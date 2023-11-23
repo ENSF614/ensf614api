@@ -31,7 +31,7 @@ public class Flight {
     private Integer aircraftID;
 	@Column(name = "coachseatprice")
 	private Double coachSeatPrice;
-	@Column(name = "businessSeatPrice")
+	@Column(name = "businessseatprice")
 	private Double businessSeatPrice;
 
     public int getFlightId(){

@@ -1,5 +1,7 @@
 package com.example.ensf614api.controllers;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ensf614api.models.Aircraft;
 import com.example.ensf614api.models.Booking;
+import com.example.ensf614api.models.Flight;
 import com.example.ensf614api.stores.BookingStore;
 
 @CrossOrigin
@@ -27,6 +31,14 @@ public class BookingController {
 		return bookingStore.getBookingsByFlightID(id);
 	}
 	
-	//get aircraft from flight id here.
+	@GetMapping("getAircraft/{id}")
+	public Optional<Aircraft> getAircraftByID(@PathVariable int id){
+		return bookingStore.getAircraftByID(id);
+	}
+	
+	@GetMapping("getFlight/{id}")
+	public Optional<Flight> getFlightByID(@PathVariable int id){
+		return bookingStore.getFlightByID(id);
+	}
 	
 }
