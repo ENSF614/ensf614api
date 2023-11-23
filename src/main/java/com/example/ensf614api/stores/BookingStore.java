@@ -1,6 +1,7 @@
 package com.example.ensf614api.stores;
 
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,8 @@ import com.example.ensf614api.dao.FlightRepository;
 import com.example.ensf614api.models.Aircraft;
 import com.example.ensf614api.models.Booking;
 import com.example.ensf614api.models.Flight;
+import com.example.ensf614api.views.BookedSeatView;
+import com.example.ensf614api.views.BookingInfoView;
 
 @Service
 public class BookingStore {
@@ -26,15 +29,31 @@ public class BookingStore {
 		this.flightRepo = flightRepo;
 	}
 	
-	public Iterable<Booking> getBookingsByFlightID(int id){
-		return bookingRepo.findByFlightID(id);
+	public List<BookedSeatView> getBookedSeats(int flightID){
+		Iterable<Booking> bookings = bookingRepo.findByFlightID(flightID);
+		
+		List<BookedSeatView> bookedSeats = new ArrayList<>();
+		for(Booking booking : bookings) {
+			bookedSeats.add(
+					new BookedSeatView(
+							booking.getSeatRow(),
+							booking.getSeatCol()
+							)
+					);
+		}
+		return bookedSeats;
 	}
 	
-	public Optional<Aircraft> getAircraftByID(int id){
-		return aircraftRepo.findById(id);
-	}
-	
-	public Optional<Flight> getFlightByID(int id){
-		return flightRepo.findById(id);
+	public BookingInfoView getBookingInfoByFlightID(int id){
+		Flight flight = flightRepo.findById(id).get();
+		Aircraft aircraft = aircraftRepo.findById(flight.getAircraftID()).get();
+		
+		return new BookingInfoView(
+					flight.getCoachSeatPrice(),
+					flight.getBusinessSeatPrice(),
+					aircraft.getNumBusinessSeats(),
+					aircraft.getRowNums(),
+					aircraft.getColNums()
+				);
 	}
 }
