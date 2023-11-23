@@ -23,7 +23,7 @@ public class DbStore {
             flight.setDestination(cities.get((i + 1) % cities.size()));
             flight.setDepartureDateTime(new GregorianCalendar(2023, Calendar.NOVEMBER, i, 9 + i % 4, 0).getTime());
             flight.setArrivalDateTime(new GregorianCalendar(2023, Calendar.NOVEMBER, i, 11 + i % 4, 0).getTime());
-            flight.setCapacity(100 + i * 10);
+//            flight.setCapacity(100 + i * 10);
             flights.add(flight);
         }
 
