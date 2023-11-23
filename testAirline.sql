@@ -7,12 +7,16 @@ CREATE TABLE User (
 	userID			integer not null auto_increment,
     fName			varchar(100),
     lName			varchar(100),
-    address			varchar(100), # might want to split this one up into street, number, city etc.
+    address			varchar(100),
+    city            varchar(100),
+    province        varchar(100),
+    postal          varchar(100),
+    country         varchar(100),
     phoneNumber 	integer(11), # extension(1) areacode(3) number(7)
     companion 		boolean,
     loungePass 		boolean,
-    renewalDate 	date,
-    role		varchar(10),
+    joinedOnDate 	date,
+    role		    integer(1),
 	primary key (userID)
 );
 
@@ -71,15 +75,15 @@ CREATE TABLE Crew (
     foreign key (flightID) references Flight(flightID)
 );
 
-INSERT INTO User (fName, lName, address, phoneNumber, companion, loungePass, renewalDate, role)
+INSERT INTO User (fName, lName, address, phoneNumber, companion, loungePass, joinedOnDate, role)
 VALUES
-('Bob', 'Jones', 'somewhere', 1234567891, false, false, '20230212', 'customer'),
-('Hillary', 'Clinton', 'somewhere', 1234567891, false, false, '20230212', 'customer'),
-('Jim', 'Jeffries', 'somewhere', 1234567891, false, false, '20230212', 'customer'),
-('Another', 'Person', 'somewhere', 1234567891, false, false, '20230212', 'customer'),
-('Captain', 'Jeffries', 'somewhere', 1234567891, false, false, '20230212', 'crew'),
-('Jessica', 'James', 'somewhere', 1234567891, false, false, '20230212', 'crew'),
-('Sarah', 'Shaw', 'somewhere', 1234567891, false, false, '20230212', 'crew');
+('Bob', 'Jones', 'somewhere', 1234567891, false, false, '20230212', 4),
+('Hillary', 'Clinton', 'somewhere', 1234567891, false, false, '20230212', 4),
+('Jim', 'Jeffries', 'somewhere', 1234567891, false, false, '20230212', 4),
+('Another', 'Person', 'somewhere', 1234567891, false, false, '20230212', 4),
+('Captain', 'Jeffries', 'somewhere', 1234567891, false, false, '20230212', 4),
+('Jessica', 'James', 'somewhere', 1234567891, false, false, '20230212', 4),
+('Sarah', 'Shaw', 'somewhere', 1234567891, false, false, '20230212', 4);
 
 INSERT INTO Aircraft (rowNums, colNums, capacity, name, type, crewNum, numBusinessSeats)
 VALUES

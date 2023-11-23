@@ -23,14 +23,22 @@ public class User {
 	private String lName;
 	@Column(name = "address")
 	private String address;
+    @Column(name = "city")
+    private String city;
+    @Column(name = "province")
+    private String province;
+    @Column(name = "postal")
+    private String postal;
+    @Column(name = "country")
+    private String country;
 	@Column(name = "phonenumber")
 	private Integer phoneNumber;
 	@Column(name = "companion")
 	private Boolean companion;
 	@Column(name = "loungepass")
 	private Boolean loungePass;
-	@Column(name = "renewaldate")
-	private Date renewalDate;
+	@Column(name = "joinedOnDate")
+	private Date joinedOnDate;
 	@Column(name = "role")
 	private String role;
 	
@@ -69,6 +77,34 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+    public String getPostal() {
+        return postal;
+    }
+
+    public void setPostal(String postal) {
+        this.postal = postal;
+    }
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = User.this.province;
+    }
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = User.this.country;
+    }
 
     // Getter and setter methods for phoneNumber
     public int getPhoneNumber() {
@@ -98,12 +134,12 @@ public class User {
     }
 
     // Getter and setter methods for renewalDate
-    public Date getRenewalDate() {
-        return renewalDate;
+    public Date getJoinedOnDate() {
+        return joinedOnDate;
     }
 
-    public void setRenewalDate(Date renewalDate) {
-        this.renewalDate = renewalDate;
+    public void setJoinedOnDate(Date joinedOnDate) {
+        this.joinedOnDate = joinedOnDate;
     }
 
     // Getter and setter methods for role
