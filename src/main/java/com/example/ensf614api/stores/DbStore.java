@@ -1,6 +1,7 @@
 package com.example.ensf614api.stores;
 
 import com.example.ensf614api.models.Flight;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,8 +9,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class DbStore {
-
-    // This is where all interaction with the DB will take place, I havent implemented any stores,  jsut some bullshit data to work with to start.
+	
+	// This is where all interaction with the DB will take place, I havent implemented any stores,  jsut some bullshit data to work with to start.
     public List<Flight> getFlights(){
         List<Flight> flights = new ArrayList<>();
         List<String> cities = Arrays.asList("Calgary", "Edmonton", "Red Deer", "Lethbridge");
@@ -28,4 +29,6 @@ public class DbStore {
 
         return flights;
     }
+    
+    
 }
