@@ -21,6 +21,10 @@ public class User {
 	private String fName;
 	@Column(name = "lname")
 	private String lName;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "password")
+    private String password;
 	@Column(name = "address")
 	private String address;
     @Column(name = "city")
