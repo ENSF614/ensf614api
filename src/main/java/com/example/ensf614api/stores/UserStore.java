@@ -1,5 +1,6 @@
 package com.example.ensf614api.stores;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.example.ensf614api.dao.UserRepository;
@@ -17,4 +18,6 @@ public class UserStore {
 	public Iterable<User> getUsers(){
 		return userRepo.findAll();
 	}
+
+	public User getUser(String userId){return userRepo.getUser(userId);}
 }
