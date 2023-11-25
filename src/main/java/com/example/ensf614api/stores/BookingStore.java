@@ -11,8 +11,8 @@ import com.example.ensf614api.dao.FlightRepository;
 import com.example.ensf614api.models.Aircraft;
 import com.example.ensf614api.models.Booking;
 import com.example.ensf614api.models.Flight;
-import com.example.ensf614api.views.BookedSeatView;
 import com.example.ensf614api.views.BookingInfoView;
+import com.example.ensf614api.views.SeatView;
 
 @Service
 public class BookingStore {
@@ -29,21 +29,6 @@ public class BookingStore {
 		this.flightRepo = flightRepo;
 	}
 	
-	public List<BookedSeatView> getBookedSeats(int flightID){
-		Iterable<Booking> bookings = bookingRepo.findByFlightID(flightID);
-		
-		List<BookedSeatView> bookedSeats = new ArrayList<>();
-		for(Booking booking : bookings) {
-			bookedSeats.add(
-					new BookedSeatView(
-							booking.getSeatRow(),
-							booking.getSeatCol()
-							)
-					);
-		}
-		return bookedSeats;
-	}
-	
 	public BookingInfoView getBookingInfoByFlightID(int id){
 		Flight flight = flightRepo.findById(id).get();
 		Aircraft aircraft = aircraftRepo.findById(flight.getAircraftID()).get();
@@ -51,9 +36,47 @@ public class BookingStore {
 		return new BookingInfoView(
 					flight.getCoachSeatPrice(),
 					flight.getBusinessSeatPrice(),
-					aircraft.getNumBusinessSeats(),
+					aircraft.getNumBusinessRows(),
 					aircraft.getRowNums(),
 					aircraft.getColNums()
 				);
 	}
+	
+	public List<SeatView> getSeatsByFlightID(int id){
+		Flight flight = flightRepo.findById(id).get();
+		Aircraft aircraft = aircraftRepo.findById(flight.getAircraftID()).get();
+		Iterable<Booking> bookings = bookingRepo.findByFlightID(id);
+		
+		boolean businessClass = true;
+		List<SeatView> seats = new ArrayList<>();
+		for(int i=1; i<aircraft.getRowNums(); i++) {
+			
+			if(i > aircraft.getNumBusinessRows())
+				businessClass = false;
+			
+			for(char j='A'; j<'A'+aircraft.getColNums()*2; j++) {
+				seats.add(
+						new SeatView(
+								i, String.valueOf(j), false,
+								flight.getFlightId(), businessClass,
+								businessClass ? flight.getBusinessSeatPrice() : flight.getCoachSeatPrice()
+								)
+						);
+			}
+		}
+		
+		//add booked flag to seats
+		for(Booking booking : bookings) {
+			int row = booking.getSeatRow();
+			String col = booking.getSeatCol();
+			for(SeatView seat : seats) {
+				if(row == seat.getSeatRow() && col.equals(seat.getSeatCol())) {
+					seat.setBooked(true);
+					continue;
+				}
+			}
+		}
+		return seats;
+	}
+	
 }

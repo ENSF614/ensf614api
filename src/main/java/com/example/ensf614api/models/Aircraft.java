@@ -28,7 +28,7 @@ public class Aircraft {
 	@Column(name = "crewnum")
 	private Integer crewNum;
 	@Column(name = "numbusinessseats")
-	private Integer numBusinessSeats;
+	private Integer numBusinessRows;
 	
 	// Getter and setter methods for aircraftID
     public Integer getAircraftID() {
@@ -94,11 +94,11 @@ public class Aircraft {
     }
 
     // Getter and setter methods for numBusinessSeats
-    public Integer getNumBusinessSeats() {
-        return numBusinessSeats;
+    public Integer getNumBusinessRows() {
+        return numBusinessRows;
     }
 
-    public void setNumBusinessSeats(Integer numBusinessSeats) {
-        this.numBusinessSeats = numBusinessSeats;
+    public void setNumBusinessRows(Integer numBusinessSeats) {
+        this.numBusinessRows = numBusinessSeats;
     }
 }

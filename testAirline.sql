@@ -31,7 +31,7 @@ CREATE TABLE Aircraft (
     name				varchar(100),
     type				varchar(100),
     crewNum				integer,
-    numBusinessSeats	integer,
+    numBusinessRows		integer,
     primary key (aircraftID)
 );
 

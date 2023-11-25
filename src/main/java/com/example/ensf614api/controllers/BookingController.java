@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ensf614api.stores.BookingStore;
-import com.example.ensf614api.views.BookedSeatView;
 import com.example.ensf614api.views.BookingInfoView;
+import com.example.ensf614api.views.SeatView;
 
 @CrossOrigin
 @RestController
@@ -25,14 +25,14 @@ public class BookingController {
 		this.bookingStore = bookingStore;
 	}
 	
-	@GetMapping("getBookedSeats/{id}")
-	public List<BookedSeatView> getBookedSeatsByFlightID(@PathVariable int id){
-		return bookingStore.getBookedSeats(id);
-	}
-	
 	@GetMapping("getBookingInfo/{id}")
 	public BookingInfoView getBookingInfoByFlightID(@PathVariable int id) {
 		return bookingStore.getBookingInfoByFlightID(id);
+	}
+	
+	@GetMapping("getFlightSeats/{id}")
+	public List<SeatView> getSeatsByFlightID(@PathVariable int id) {
+		return bookingStore.getSeatsByFlightID(id);
 	}
 	
 }
