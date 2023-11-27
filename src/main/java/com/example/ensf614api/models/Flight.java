@@ -14,7 +14,7 @@ import jakarta.persistence.Id;
 public class Flight {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "flightid", nullable=false)
     private Integer flightId;
 	@Column(name = "flightnumber")

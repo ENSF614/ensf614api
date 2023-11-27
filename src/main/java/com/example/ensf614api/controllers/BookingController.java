@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ensf614api.models.Booking;
 import com.example.ensf614api.stores.BookingStore;
 import com.example.ensf614api.views.BookingInfoView;
 import com.example.ensf614api.views.CreditCard;
@@ -46,6 +47,11 @@ public class BookingController {
 		System.out.println(card.getCardCVV());
 		
 		return bookingStore.validateCreditCard(card);
+	}
+	
+	@PutMapping("putBooking")
+	public boolean putBooking(@RequestBody Booking booking) {
+		return bookingStore.addBooking(booking);
 	}
 	
 }

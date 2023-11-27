@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ensf614api.dao.AircraftRepository;
 import com.example.ensf614api.dao.BookingRepository;
@@ -122,11 +123,22 @@ public class BookingStore {
 		
 		return true;
 	}
+	
 	public boolean validateCreditCard(CreditCard card) {
 		boolean num = validateNumber(card.getCardNumber());
 		boolean cvv = validateCVV(card.getCardCVV());
 		boolean exp = validateExpiry(card.getCardExpiry());
 		return num && cvv && exp;
+	}
+	
+	public boolean addBooking(Booking booking) {
+		try {
+			bookingRepo.save(booking);
+		} catch(Exception e) {
+			System.err.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 	
 }

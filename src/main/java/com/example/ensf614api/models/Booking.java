@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 public class Booking {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "bookingid", nullable = false)
 	private Integer bookingID;
 	@Column(name = "userid", nullable = false)
