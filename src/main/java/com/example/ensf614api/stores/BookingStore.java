@@ -103,21 +103,17 @@ public class BookingStore {
 			return false;
 		
 		int month = Integer.valueOf(num.substring(0,2));
-		System.out.println("Month: " + month);
 		if(month < 1 || month > 12)
 			return false;
 		
 		int year = Integer.valueOf(num.substring(2));
-		System.out.println("Year: " + year);
 		LocalDate thisDate = LocalDate.now();
 		
 		int thisYear = Integer.valueOf(Integer.valueOf(thisDate.getYear()).toString().substring(2));
-		System.out.println("This year: " + thisYear);
 		if(year < thisYear)
 			return false;
 		
 		int thisMonth = thisDate.getMonthValue();
-		System.out.println("This month: " + thisMonth);
 		if(month < thisMonth && year == thisYear)
 			return false;
 		

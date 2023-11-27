@@ -42,10 +42,6 @@ public class BookingController {
 	
 	@PostMapping("validateCard")
 	public boolean validateCreditCard(@RequestBody CreditCard card) {
-		System.out.println(card.getCardNumber());
-		System.out.println(card.getCardExpiry());
-		System.out.println(card.getCardCVV());
-		
 		return bookingStore.validateCreditCard(card);
 	}
 	

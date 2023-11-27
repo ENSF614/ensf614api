@@ -27,7 +27,7 @@ public class Aircraft {
 	private String type;
 	@Column(name = "crewnum")
 	private Integer crewNum;
-	@Column(name = "numbusinessseats")
+	@Column(name = "numbusinessrows")
 	private Integer numBusinessRows;
 	
 	// Getter and setter methods for aircraftID
@@ -98,7 +98,7 @@ public class Aircraft {
         return numBusinessRows;
     }
 
-    public void setNumBusinessRows(Integer numBusinessSeats) {
-        this.numBusinessRows = numBusinessSeats;
+    public void setNumBusinessRows(Integer numBusinessRows) {
+        this.numBusinessRows = numBusinessRows;
     }
 }
