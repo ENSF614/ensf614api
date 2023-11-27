@@ -63,7 +63,8 @@ CREATE TABLE Booking (
     seatCol				varchar(1),
     primary key (bookingID),
     foreign key (userID) references User(userID),
-    foreign key (flightID) references Flight(flightID)
+    foreign key (flightID) references Flight(flightID),
+    CONSTRAINT UC_Booking UNIQUE (flightID, seatRow, seatCol)
 );
 
 DROP TABLE IF EXISTS Crew;
@@ -87,7 +88,7 @@ VALUES
 ('Jessica', 'James', 'jessicajames@gmail.com', 'password', 'somewhere', 1234567891, false, false, '20230212', 4),
 ('Sarah', 'Shaw', 'sarahshaw@gmail.com', 'password', 'somewhere', 1234567891, false, false, '20230212', 4);
 
-INSERT INTO Aircraft (rowNums, colNums, capacity, name, type, crewNum, numBusinessSeats)
+INSERT INTO Aircraft (rowNums, colNums, capacity, name, type, crewNum, numBusinessRows)
 VALUES
 (50, 3, 50*3, 'plane1', 'Airbus A380', 3, 30),
 (30, 2, 30*2, 'plane2', 'Airbus A320', 3, 10);

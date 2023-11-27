@@ -6,11 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ensf614api.models.Booking;
 import com.example.ensf614api.stores.BookingStore;
 import com.example.ensf614api.views.BookingInfoView;
+import com.example.ensf614api.views.CreditCard;
 import com.example.ensf614api.views.SeatView;
 
 @CrossOrigin
@@ -33,6 +38,16 @@ public class BookingController {
 	@GetMapping("getFlightSeats/{id}")
 	public List<SeatView> getSeatsByFlightID(@PathVariable int id) {
 		return bookingStore.getSeatsByFlightID(id);
+	}
+	
+	@PostMapping("validateCard")
+	public boolean validateCreditCard(@RequestBody CreditCard card) {
+		return bookingStore.validateCreditCard(card);
+	}
+	
+	@PutMapping("putBooking")
+	public boolean putBooking(@RequestBody Booking booking) {
+		return bookingStore.addBooking(booking);
 	}
 	
 }
