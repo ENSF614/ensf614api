@@ -1,5 +1,6 @@
 package com.example.ensf614api.stores;
 
+import com.example.ensf614api.models.SignIn;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +21,8 @@ public class UserStore {
 	}
 
 	public User getUser(String userId){return userRepo.getUser(userId);}
+
+	public User signIn(SignIn details){return userRepo.signIn(details.getUserId(), details.getPassword());}
+
+
 }

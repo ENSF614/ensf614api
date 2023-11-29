@@ -1,5 +1,6 @@
 package com.example.ensf614api.controllers;
 
+import com.example.ensf614api.models.SignIn;
 import com.example.ensf614api.models.User;
 import com.example.ensf614api.stores.UserStore;
 
@@ -25,4 +26,10 @@ public class UserController {
 
 	@GetMapping("getUser/{userId}")
 	public User getUser(@PathVariable("userId") String userId){return userStore.getUser(userId);}
+
+	@GetMapping("signIn")
+	public User signIn(@RequestBody SignIn details){return userStore.signIn(details);}
+
+	@PostMapping("newUser")
+	public User createNewUser(@RequestBody User newUser){return userStore.}
 }
