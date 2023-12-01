@@ -5,14 +5,12 @@ public class EmailDetails {
 	private String recipient;
 	private String msgBody;
 	private String subject;
-	private String attachment;
 	
 	public EmailDetails(String recipient, String msgBody, 
-						String subject, String attachment) {
+						String subject) {
         this.recipient = recipient;
         this.msgBody = msgBody;
         this.subject = subject;
-        this.attachment = attachment;
     }
 
     // Getter for recipient
@@ -43,16 +41,6 @@ public class EmailDetails {
     // Setter for subject
     public void setSubject(String subject) {
         this.subject = subject;
-    }
-
-    // Getter for attachment
-    public String getAttachment() {
-        return attachment;
-    }
-
-    // Setter for attachment
-    public void setAttachment(String attachment) {
-        this.attachment = attachment;
     }
 
 }
