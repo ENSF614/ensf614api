@@ -1,5 +1,7 @@
 package com.example.ensf614api.stores;
 
+import com.example.ensf614api.models.SignIn;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +10,8 @@ import com.example.ensf614api.models.User;
 
 @Service
 public class UserStore {
-	
+
+	@Autowired
 	private UserRepository userRepo;
 	
 	public UserStore(UserRepository userRepository) {
@@ -20,4 +23,19 @@ public class UserStore {
 	}
 
 	public User getUser(String userId){return userRepo.getUser(userId);}
+
+	public User signIn(SignIn details){
+		return userRepo.signIn(details.getEmail(), details.getPassword());
+	}
+
+	public User createUser(User user){
+		return userRepo.save(user);
+	}
+
+	public boolean doesUserExist(String email){
+		var user = userRepo.doesUserExist(email);
+		return (user != null);
+	}
+
+
 }
