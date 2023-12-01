@@ -14,11 +14,11 @@ CREATE TABLE User (
     province        varchar(100),
     postal          varchar(100),
     country         varchar(100),
-    phoneNumber 	integer(11), # extension(1) areacode(3) number(7)
-    companion   	boolean,
+    phoneNumber 	varchar(100),
+    companionPass  	boolean,
     loungePass 		boolean,
     joinedOnDate 	date,
-    role		    integer(1),
+    role		    varchar(100),
 	primary key (userID)
 );
 
@@ -78,15 +78,15 @@ CREATE TABLE Crew (
     foreign key (flightID) references Flight(flightID)
 );
 
-INSERT INTO User (fName, lName, email, password, address, phoneNumber, companion, loungePass, joinedOnDate, role)
+INSERT INTO User (fName, lName, email, password, address, phoneNumber, companionPass, loungePass, joinedOnDate, role)
 VALUES
-('Bob', 'Jones', 'bobjones@gmail.com', 'password', 'somewhere', 1234567891, false, false, '20230212', 4),
-('Hillary', 'Clinton', 'hillaryclinton@gmail.com', 'password', 'somewhere', 1234567891, false, false, '20230212', 4),
-('Jim', 'Jeffries', 'jimjeffries@gmail.com', 'password', 'somewhere', 1234567891, false, false, '20230212', 4),
-('Another', 'Person', 'anotherperson@gmail.com', 'password', 'somewhere', 1234567891, false, false, '20230212', 4),
-('Captain', 'Jeffries', 'captainjeffries@gmail.com', 'password', 'somewhere', 1234567891, false, false, '20230212', 4),
-('Jessica', 'James', 'jessicajames@gmail.com', 'password', 'somewhere', 1234567891, false, false, '20230212', 4),
-('Sarah', 'Shaw', 'sarahshaw@gmail.com', 'password', 'somewhere', 1234567891, false, false, '20230212', 4);
+('Bob', 'Jones', 'bobjones@gmail.com', 'password', 'somewhere', '1234567891', false, false, '20230212', 'Admin'),
+('Hillary', 'Clinton', 'hillaryclinton@gmail.com', 'password', 'somewhere', '1234567891', false, false, '20230212', 'Admin'),
+('Jim', 'Jeffries', 'jimjeffries@gmail.com', 'password', 'somewhere', '1234567891', false, false, '20230212', 'Admin'),
+('Another', 'Person', 'anotherperson@gmail.com', 'password', 'somewhere', '1234567891', false, false, '20230212', 'Admin'),
+('Captain', 'Jeffries', 'captainjeffries@gmail.com', 'password', 'somewhere', '1234567891', false, false, '20230212', 'Admin'),
+('Jessica', 'James', 'jessicajames@gmail.com', 'password', 'somewhere', '1234567891', false, false, '20230212', 'Admin'),
+('Sarah', 'Shaw', 'sarahshaw@gmail.com', 'password', 'somewhere', '1234567891', false, false, '20230212', 'Admin');
 
 INSERT INTO Aircraft (rowNums, colNums, capacity, name, type, crewNum, numBusinessRows)
 VALUES

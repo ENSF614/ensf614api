@@ -36,9 +36,9 @@ public class User {
     @Column(name = "country")
     private String country;
 	@Column(name = "phonenumber")
-	private Integer phoneNumber;
-	@Column(name = "companion")
-	private Boolean companion;
+	private String phoneNumber;
+	@Column(name = "companionPass")
+	private Boolean companionPass;
 	@Column(name = "loungepass")
 	private Boolean loungePass;
 	@Column(name = "joinedOnDate")
@@ -100,32 +100,42 @@ public class User {
     }
 
     public void setProvince(String province) {
-        this.province = User.this.province;
+        this.province = province;
     }
     public String getCountry() {
         return country;
     }
 
     public void setCountry(String country) {
-        this.country = User.this.country;
+        this.country = country;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public String getEmail(){return email;}
+
+    public void setPassword(String password){
+        this.password = password;
     }
 
     // Getter and setter methods for phoneNumber
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     // Getter and setter methods for companion
     public boolean isCompanion() {
-        return companion;
+        return companionPass;
     }
 
-    public void setCompanion(boolean companion) {
-        this.companion = companion;
+    public void setCompanionPass(boolean companionPass) {
+        this.companionPass = companionPass;
     }
 
     // Getter and setter methods for loungePass

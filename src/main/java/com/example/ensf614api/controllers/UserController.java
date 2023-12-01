@@ -5,6 +5,7 @@ import com.example.ensf614api.models.User;
 import com.example.ensf614api.stores.UserStore;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -27,9 +28,21 @@ public class UserController {
 	@GetMapping("getUser/{userId}")
 	public User getUser(@PathVariable("userId") String userId){return userStore.getUser(userId);}
 
-	@GetMapping("signIn")
-	public User signIn(@RequestBody SignIn details){return userStore.signIn(details);}
+	@PostMapping("login")
+	public ResponseEntity<?> signIn(@RequestBody SignIn details){
+		var signedInUser = userStore.signIn(details);
+
+		if (signedInUser == null){
+			return ResponseEntity.badRequest().body("Invalid Username or Password");
+		}
+		return ResponseEntity.ok(signedInUser);
+	}
 
 	@PostMapping("newUser")
-	public User createNewUser(@RequestBody User newUser){return userStore.}
+	public ResponseEntity<?> createNewUser(@RequestBody User newUser){
+		if(userStore.doesUserExist(newUser.getEmail())){
+			return ResponseEntity.badRequest().body("User already exists");
+		}
+		return ResponseEntity.ok(userStore.createUser(newUser));
+	}
 }
