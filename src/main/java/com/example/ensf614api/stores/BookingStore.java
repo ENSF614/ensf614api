@@ -62,7 +62,8 @@ public class BookingStore {
 						new SeatView(
 								i, String.valueOf(j), false,
 								flight.getFlightId(), businessClass,
-								businessClass ? flight.getBusinessSeatPrice() : flight.getCoachSeatPrice()
+								businessClass ? flight.getBusinessSeatPrice() : flight.getCoachSeatPrice(),
+								""
 								)
 						);
 			}
@@ -131,6 +132,16 @@ public class BookingStore {
 		try {
 			bookingRepo.save(booking);
 		} catch(Exception e) {
+			System.err.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean addBookings(ArrayList<Booking> bookings) {
+		try {
+			bookingRepo.saveAll(bookings);
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			return false;
 		}

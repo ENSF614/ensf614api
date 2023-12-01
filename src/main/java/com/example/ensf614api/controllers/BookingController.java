@@ -1,5 +1,6 @@
 package com.example.ensf614api.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,11 @@ public class BookingController {
 	@PutMapping("putBooking")
 	public boolean putBooking(@RequestBody Booking booking) {
 		return bookingStore.addBooking(booking);
+	}
+	
+	@PutMapping("putBookings")
+	public boolean putBookings(@RequestBody ArrayList<Booking> bookings) {
+		return bookingStore.addBookings(bookings);
 	}
 	
 }

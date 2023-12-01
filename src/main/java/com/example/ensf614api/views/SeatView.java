@@ -8,16 +8,19 @@ public class SeatView {
 	private Integer flightID;
 	private Boolean businessClass;
 	private Double price;
+	private String passengerName;
 	
 	public SeatView(Integer seatRow, String seatCol, 
 					Boolean booked, Integer flightID, 
-					Boolean seatClass, Double price) {
+					Boolean seatClass, Double price,
+					String passengerName) {
         this.seatRow = seatRow;
         this.seatCol = seatCol;
         this.booked = booked;
         this.flightID = flightID;
         this.businessClass = seatClass;
         this.price = price;
+        this.passengerName = passengerName;
     }
 
     // Getter and Setter for seatRow
@@ -74,9 +77,12 @@ public class SeatView {
         this.price = price;
     }
 
-    // Default constructor
-    public SeatView() {
-        // Default constructor with no parameters
+    public String getPassengerName() {
+    	return this.passengerName;
+    }
+    
+    public void setPassengerName(String name) {
+    	this.passengerName = name;
     }
 
 }

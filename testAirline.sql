@@ -61,6 +61,7 @@ CREATE TABLE Booking (
     class				varchar(50),
     seatRow				integer,
     seatCol				varchar(1),
+    passengerName		varchar(100),
     primary key (bookingID),
     foreign key (userID) references User(userID),
     foreign key (flightID) references Flight(flightID),
@@ -100,11 +101,11 @@ VALUES
 ('1', 'Edmonton', 'Calgary', '2023-11-24 10:34:08', '2023-11-24 11:04:08',
 1, 150, 300);
 
-INSERT INTO Booking (userID, flightID, cancelInsurance, paid, payMethod, class, seatRow, seatCol)
+INSERT INTO Booking (userID, flightID, cancelInsurance, paid, payMethod, class, seatRow, seatCol, passengerName)
 VALUES
-(1, 1, false, true, 'credit', 'business', 1, 'A'),
-(2, 1, false, true, 'credit', 'economy', 10, 'C'),
-(3, 1, false, true, 'credit', 'economy', 17, 'E');
+(1, 1, false, true, 'credit', 'business', 1, 'A', 'Bob Jones'),
+(2, 1, false, true, 'credit', 'economy', 10, 'C', 'Hillary Clinton'),
+(3, 1, false, true, 'credit', 'economy', 17, 'E', 'Jim Jeffries');
 
 INSERT INTO Crew (userID, flightID, position)
 VALUES

@@ -31,6 +31,8 @@ public class Booking {
     private Integer seatRow;
 	@Column(name = "seatcol")
     private String seatCol;
+	@Column(name = "passengername")
+	private String passengerName;
 
     // Getter and setter methods for bookingID
     public Integer getBookingID() {
@@ -111,5 +113,13 @@ public class Booking {
 
     public void setSeatCol(String seatCol) {
         this.seatCol = seatCol;
+    }
+    
+    public String getPassengerName() {
+    	return passengerName;
+    }
+    
+    public void setPassengerName(String name) {
+    	this.passengerName = name;
     }
 }
