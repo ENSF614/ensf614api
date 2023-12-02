@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ensf614api.models.Booking;
 import com.example.ensf614api.stores.BookingStore;
+import com.example.ensf614api.stores.EmailStore;
 import com.example.ensf614api.views.BookingInfoView;
 import com.example.ensf614api.views.CreditCard;
 import com.example.ensf614api.views.SeatView;
@@ -25,10 +26,13 @@ import com.example.ensf614api.views.SeatView;
 public class BookingController {
 
 	private final BookingStore bookingStore;
+	private final EmailStore emailStore;
 	
 	@Autowired
-	public BookingController(BookingStore bookingStore) {
+	public BookingController(BookingStore bookingStore,
+							 EmailStore emailStore) {
 		this.bookingStore = bookingStore;
+		this.emailStore = emailStore;
 	}
 	
 	@GetMapping("getBookingInfo/{id}")
@@ -52,8 +56,12 @@ public class BookingController {
 	}
 	
 	@PutMapping("putBookings")
-	public boolean putBookings(@RequestBody ArrayList<Booking> bookings) {
-		return bookingStore.addBookings(bookings);
+	public String putBookings(@RequestBody ArrayList<Booking> bookings) {
+		if(!bookingStore.addBookings(bookings))
+			return "unable to make booking";
+		if(!emailStore.sendBookingEmail(bookings))
+			return "unable to send email";
+		return "successful booking";
 	}
 	
 }

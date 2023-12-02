@@ -23,7 +23,7 @@ public class EmailController {
 	}
 
 	@PostMapping("sendEmail")
-	public String validateCreditCard(@RequestBody EmailDetails details) {
+	public boolean validateCreditCard(@RequestBody EmailDetails details) {
 		return emailStore.sendSimpleMail(details);
 	}
 }

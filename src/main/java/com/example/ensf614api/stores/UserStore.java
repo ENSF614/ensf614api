@@ -36,6 +36,10 @@ public class UserStore {
 		var user = userRepo.doesUserExist(email);
 		return (user != null);
 	}
+	
+	public User updateCompanionPass(User user) {
+		return userRepo.save(user);
+	}
 
 
 }

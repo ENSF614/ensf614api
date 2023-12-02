@@ -45,4 +45,9 @@ public class UserController {
 		}
 		return ResponseEntity.ok(userStore.createUser(newUser));
 	}
+	
+	@PutMapping("updateUser")
+	public ResponseEntity<?> updateCompanionPass(@RequestBody User user){
+		return ResponseEntity.ok(userStore.updateCompanionPass(user));
+	}
 }
