@@ -8,6 +8,7 @@ import com.example.ensf614api.dao.BookingRepository;
 import com.example.ensf614api.dao.FlightRepository;
 import com.example.ensf614api.models.Booking;
 import com.example.ensf614api.models.Flight;
+import com.example.ensf614api.views.FlightSearchView;
 import com.example.ensf614api.views.UserFlightInfoView;
 
 @Service
@@ -20,6 +21,10 @@ public class FlightStore {
 					   BookingRepository bookingRepo) {
 		this.flightRepo = flightRepo;
 		this.bookingRepo = bookingRepo;
+	}
+	
+	public Iterable<Flight> getFlights(){
+		return flightRepo.findAll();
 	}
 	
 	public ArrayList<UserFlightInfoView> getUserFlightInfo(Integer userID){
@@ -47,6 +52,14 @@ public class FlightStore {
 					);
 		}
 		return userFlightInfo;
+	}
+	
+	public Iterable<Flight> getFlightsByDetails(FlightSearchView flightDetails){
+		return flightRepo.findByDetails(
+				flightDetails.getOrigin(),
+				flightDetails.getDestination(),
+				flightDetails.getDepartureDateTime()
+				);
 	}
 
 }
