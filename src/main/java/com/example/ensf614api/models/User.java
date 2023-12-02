@@ -130,7 +130,7 @@ public class User {
     }
 
     // Getter and setter methods for companion
-    public boolean isCompanion() {
+    public boolean getCompanionPass() {
         return companionPass;
     }
 
@@ -139,7 +139,7 @@ public class User {
     }
 
     // Getter and setter methods for loungePass
-    public boolean isLoungePass() {
+    public boolean getLoungePass() {
         return loungePass;
     }
 
