@@ -8,9 +8,12 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.example.ensf614api.dao.FlightRepository;
 import com.example.ensf614api.dao.UserRepository;
 import com.example.ensf614api.models.Booking;
+import com.example.ensf614api.models.Flight;
 import com.example.ensf614api.models.User;
+import com.example.ensf614api.views.CancelView;
 import com.example.ensf614api.views.EmailDetails;
 
 @Service
@@ -21,27 +24,12 @@ public class EmailStore {
 	@Value("${spring.mail.username}")
 	private String sender;
 	private UserRepository userRepo;
+	private FlightRepository flightRepo;
 	
-	public EmailStore(UserRepository userRepo) {
+	public EmailStore(UserRepository userRepo,
+					  FlightRepository flightRepo) {
 		this.userRepo = userRepo;
-	}
-	
-	public boolean sendSimpleMail(EmailDetails details) {
-		try {
-			SimpleMailMessage mailMessage = new SimpleMailMessage();
-			
-			mailMessage.setFrom(sender);
-			mailMessage.setTo(details.getRecipient());
-			mailMessage.setText(details.getMsgBody());
-			mailMessage.setSubject(details.getSubject());
-			
-			javaMailSender.send(mailMessage);
-			return true;
-		}
-		catch (Exception e) {
-			System.out.println("Unable to send email" + e.getMessage());
-			return false;
-		}
+		this.flightRepo = flightRepo;
 	}
 	
 	public boolean sendBookingEmail(ArrayList<Booking> bookings) {
@@ -61,6 +49,43 @@ public class EmailStore {
 			for(Booking booking : bookings) {
 				emailSubject += booking.getBookingID() + " ";
 			}
+			
+			SimpleMailMessage mailMessage = new SimpleMailMessage();
+			mailMessage.setFrom(sender);
+			mailMessage.setTo(email);
+			mailMessage.setSubject(emailSubject);
+			mailMessage.setText(msgBody);
+			
+			
+			javaMailSender.send(mailMessage);
+			return true;
+		}
+		catch (Exception e) {
+			System.out.println("Unable to send email" + e.getMessage());
+			return false;
+		}
+	}
+	
+	public boolean sendCancellationEmail(CancelView cancel) {
+		
+		Flight flight = flightRepo.findById(cancel.getFlightID()).get();
+		String flightNo = flight.getFlightNo();
+		User user = userRepo.findById(Integer.valueOf(cancel.getUserID())).get();
+		String email = user.getEmail();
+		
+		try {
+			String emailSubject = "ENSF614 Airlines Cancellation: ";
+			String msgBody = user.getfName() + " " + user.getlName() +
+					",\n\nThis is a confirmation of your cancellation for "+
+					" booking number " + cancel.getBookingID() + 
+					" for flight " + flightNo + ".";
+			
+			if(cancel.getCancelInsurance()) {
+				msgBody += " Because you had cancellation insurance we" +
+						   " fully refunded your ticket.";
+			}
+			
+			msgBody += "\n\nSincerly,\nENSF614 Airlines";
 			
 			SimpleMailMessage mailMessage = new SimpleMailMessage();
 			mailMessage.setFrom(sender);

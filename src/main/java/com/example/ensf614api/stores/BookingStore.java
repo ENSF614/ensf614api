@@ -148,4 +148,14 @@ public class BookingStore {
 		return true;
 	}
 	
+	public boolean cancelBooking(Integer booking) {
+		try {
+			bookingRepo.deleteById(booking);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
 }

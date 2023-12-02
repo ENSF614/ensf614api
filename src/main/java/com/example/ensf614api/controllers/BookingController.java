@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import com.example.ensf614api.models.Booking;
 import com.example.ensf614api.stores.BookingStore;
 import com.example.ensf614api.stores.EmailStore;
 import com.example.ensf614api.views.BookingInfoView;
+import com.example.ensf614api.views.CancelView;
 import com.example.ensf614api.views.CreditCard;
 import com.example.ensf614api.views.SeatView;
 
@@ -62,6 +64,15 @@ public class BookingController {
 		if(!emailStore.sendBookingEmail(bookings))
 			return "unable to send email";
 		return "successful booking";
+	}
+	
+	@PostMapping("cancelBooking")
+	public String cancelBooking(@RequestBody CancelView cancel) {
+		if(!bookingStore.cancelBooking(cancel.getBookingID()))
+			return "Failed to cancel booking";
+		if(!emailStore.sendCancellationEmail(cancel))
+			return "Failed to send confirmation email";
+		return "success";
 	}
 	
 }
