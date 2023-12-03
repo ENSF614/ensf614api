@@ -42,7 +42,11 @@ public class FlightController {
 	
 	@PostMapping("searchFlights")
 	public ResponseEntity<Iterable<Flight>> searchFlights(@RequestBody FlightSearchView flightDetails){
-		return new ResponseEntity<>(flightStore.getFlightsByDetails(flightDetails), HttpStatus.OK);
+		var flights = flightStore.getFlightsByDetails(flightDetails);
+
+		return ResponseEntity.ok(flights);
+
+//		return new ResponseEntity<>(flightStore.getFlightsByDetails(flightDetails), HttpStatus.OK);
 	}
 
 }
