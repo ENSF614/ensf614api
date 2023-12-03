@@ -4,10 +4,7 @@ import com.example.ensf614api.stores.ManifestStore;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
@@ -28,5 +25,14 @@ public class ManifestController {
             return ResponseEntity.badRequest().body("No Flight Manifests Found");
         }
         return ResponseEntity.ok(manifests);
+    }
+
+    @GetMapping("getManifest/{flightId}")
+    public ResponseEntity<?> getAllManifestByFlightId(@PathVariable("flightId") Integer flightId){
+        var manifest = manifestStore.GetFlightManifestByFlight(flightId);
+        if (manifest == null){
+            return ResponseEntity.badRequest().body("No Flight Manifests Found");
+        }
+        return ResponseEntity.ok(manifest);
     }
 }

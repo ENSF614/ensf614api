@@ -40,14 +40,16 @@ public class ManifestStore {
     public List<FlightManifest> GetFlightManifests(){
         List<Flight> flights = StreamSupport.stream(flightRepo.findAll().spliterator(), false).collect(Collectors.toList());
         List<Booking> allBookings = StreamSupport.stream(bookingRepo.findAll().spliterator(), false).collect(Collectors.toList());
+        List<Aircraft> aircraftList = StreamSupport.stream(aircraftRepo.findAll().spliterator(), false).collect(Collectors.toList());
         List<FlightManifest> manifestList = new ArrayList<FlightManifest>();
 
         for(Flight flight : flights){
+            Aircraft ac = aircraftList.stream().filter(x -> x.getAircraftID().equals(flight.getAircraftID())).findFirst().orElseThrow(() -> new NoSuchElementException("No Aircraft found for this flight"));
             Aircraft aircraft = aircraftRepo.findById(flight.getAircraftID()).orElseThrow(() -> new NoSuchElementException("No aircraft found for this flight."));
             var bookings = allBookings.stream().filter(x -> x.getFlightID().equals(flight.getFlightId())).collect(Collectors.toList());
             var count = bookings.size();
-            var pilots = userRepo.getPilots(flight.getFlightId());
-            var fa = userRepo.getFas(flight.getFlightId());
+//            var pilots = userRepo.getPilots(flight.getFlightId());
+//            var fa = userRepo.getFas(flight.getFlightId());
 
             var manifest = new FlightManifest();
             manifest.setAircraft(aircraft);
@@ -55,13 +57,35 @@ public class ManifestStore {
             manifest.setBooked(count);
             manifest.setFlight(flight);
             manifest.setBookings(bookings);
-            manifest.setPilots(pilots);
-            manifest.setFlightAttendants(fa);
+//            manifest.setPilots(pilots);
+//            manifest.setFlightAttendants(fa);
 
             manifestList.add(manifest);
 
         }
 
         return manifestList;
+    }
+
+    public FlightManifest GetFlightManifestByFlight(Integer flightID){
+        Flight flight = flightRepo.findById(flightID).orElseThrow(()-> new NoSuchElementException("No Flight found"));
+        List<Booking> allBookings = StreamSupport.stream(bookingRepo.findAll().spliterator(), false).collect(Collectors.toList());
+
+        Aircraft aircraft = aircraftRepo.findById(flight.getAircraftID()).orElseThrow(() -> new NoSuchElementException("No aircraft found for this flight."));
+        var bookings = allBookings.stream().filter(x -> x.getFlightID().equals(flight.getFlightId())).collect(Collectors.toList());
+        var count = bookings.size();
+        var pilots = userRepo.getPilots(flight.getFlightId());
+        var fa = userRepo.getFas(flight.getFlightId());
+
+        var manifest = new FlightManifest();
+        manifest.setAircraft(aircraft);
+        manifest.setCapacity(aircraft.getCapacity());
+        manifest.setBooked(count);
+        manifest.setFlight(flight);
+        manifest.setBookings(bookings);
+        manifest.setPilots(pilots);
+        manifest.setFlightAttendants(fa);
+
+        return manifest;
     }
 }
