@@ -25,8 +25,14 @@ public class Aircraft {
 	private String name;
 	@Column(name = "type")
 	private String type;
-	@Column(name = "crewnum")
-	private Integer crewNum;
+	@Column(name = "pilotNum")
+	private Integer pilotNum;
+    @Column(name = "crewNum")
+    private Integer crewNum;
+    @Column(name = "cycles")
+    private Integer cycles;
+    @Column(name = "hours")
+    private Double hours;
 	@Column(name = "numbusinessrows")
 	private Integer numBusinessRows;
 	
@@ -93,6 +99,9 @@ public class Aircraft {
         this.crewNum = crewNum;
     }
 
+    public Integer getPilotNum(){return this.pilotNum;}
+    public void setPilotNum(Integer pilotNum){this.pilotNum = pilotNum;}
+
     // Getter and setter methods for numBusinessSeats
     public Integer getNumBusinessRows() {
         return numBusinessRows;
@@ -101,4 +110,10 @@ public class Aircraft {
     public void setNumBusinessRows(Integer numBusinessRows) {
         this.numBusinessRows = numBusinessRows;
     }
+
+    public Integer getCycles(){return this.cycles;}
+    public void setCycles(Integer cycles){this.cycles = cycles;}
+
+    public Double getHours(){return this.hours;}
+    public void setHours(Double hours){this.hours = hours;}
 }
