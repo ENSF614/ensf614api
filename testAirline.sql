@@ -71,7 +71,7 @@ CREATE TABLE Booking (
     userID				integer not null,
     flightID			integer not null,
     cancelInsurance		boolean,
-    paid				boolean, 
+    paid				real, 
     payMethod			varchar(50),
     class				varchar(50),
     seatRow				integer,

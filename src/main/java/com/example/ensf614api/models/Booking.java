@@ -22,7 +22,7 @@ public class Booking {
 	@Column(name = "cancelinsurance")
 	private Boolean cancelInsurance;
 	@Column(name = "paid")
-	private Boolean paid;
+	private Double paid;
 	@Column(name = "paymethod")
 	private String payMethod;
 	@Column(name = "class")
@@ -71,11 +71,11 @@ public class Booking {
     }
 
     // Getter and setter methods for paid
-    public Boolean getPaid() {
+    public Double getPaid() {
         return paid;
     }
 
-    public void setPaid(Boolean paid) {
+    public void setPaid(Double paid) {
         this.paid = paid;
     }
 
