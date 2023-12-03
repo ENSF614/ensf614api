@@ -39,12 +39,12 @@ public class ManifestStore {
 
     public List<FlightManifest> GetFlightManifests(){
         List<Flight> flights = StreamSupport.stream(flightRepo.findAll().spliterator(), false).collect(Collectors.toList());
-        Stream<Booking> allBookings = StreamSupport.stream(bookingRepo.findAll().spliterator(), false);
+        List<Booking> allBookings = StreamSupport.stream(bookingRepo.findAll().spliterator(), false).collect(Collectors.toList());
         List<FlightManifest> manifestList = new ArrayList<FlightManifest>();
 
         for(Flight flight : flights){
             Aircraft aircraft = aircraftRepo.findById(flight.getAircraftID()).orElseThrow(() -> new NoSuchElementException("No aircraft found for this flight."));
-            var bookings = allBookings.filter(x -> x.getFlightID().equals(flight.getFlightId())).collect(Collectors.toList());
+            var bookings = allBookings.stream().filter(x -> x.getFlightID().equals(flight.getFlightId())).collect(Collectors.toList());
             var count = bookings.size();
             var pilots = userRepo.getPilots(flight.getFlightId());
             var fa = userRepo.getFas(flight.getFlightId());
