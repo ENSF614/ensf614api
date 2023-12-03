@@ -24,7 +24,6 @@ import com.example.ensf614api.models.Booking;
 import com.example.ensf614api.models.Flight;
 import com.example.ensf614api.models.User;
 import com.example.ensf614api.views.CancelView;
-import com.example.ensf614api.views.EmailDetails;
 
 import jakarta.mail.internet.MimeMessage;
 
@@ -71,8 +70,6 @@ public class EmailStore {
 	
 	private boolean createReciept(ArrayList<Booking> bookings, String path) {
 		
-		User user = userRepo.getUser(
-				String.valueOf(bookings.get(0).getUserID()));
 		Flight flight = flightRepo.findById(bookings.get(0).getFlightID()).get();
 		
 		String bookingNumbers = "";
