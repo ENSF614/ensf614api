@@ -60,7 +60,7 @@ public class BookingController {
 	public String putBookings(@RequestBody ArrayList<Booking> bookings) {
 		if(!bookingStore.addBookings(bookings))
 			return "unable to make booking";
-		if(!emailStore.sendBookingEmail(bookings))
+		if(!emailStore.sendBookingEmailWithAttatchment(bookings))
 			return "unable to send email";
 		return "successful booking";
 	}
