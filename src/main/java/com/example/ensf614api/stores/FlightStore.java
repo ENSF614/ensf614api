@@ -1,6 +1,11 @@
 package com.example.ensf614api.stores;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 
@@ -55,11 +60,26 @@ public class FlightStore {
 	}
 	
 	public Iterable<Flight> getFlightsByDetails(FlightSearchView flightDetails){
-		return flightRepo.findByDetails(
-				flightDetails.getOrigin(),
-				flightDetails.getDestination(),
-				flightDetails.getDepartureDateTime()
-				);
+		var allFlights = flightRepo.findAll();
+
+		Stream<Flight> stream = StreamSupport.stream(allFlights.spliterator(), false);
+
+		List<Flight> filteredList = stream
+				.filter(x -> x.getOrigin()
+				.equals(flightDetails.getOrigin()))
+				.filter(x -> x.getDestination()
+						.equals(flightDetails.getDestination()))
+				.filter(x -> x.getDepartureDateTime()
+						.toInstant()
+						.atZone(ZoneId.systemDefault()).toLocalDate()
+						.equals(flightDetails
+								.getDepartureDateTime()
+								.toInstant()
+								.atZone(ZoneId.systemDefault())
+								.toLocalDate()))
+				.collect(Collectors.toList());
+		return filteredList;
+
 	}
 
 }
