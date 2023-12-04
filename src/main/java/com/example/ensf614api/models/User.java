@@ -45,8 +45,30 @@ public class User {
 	private Date joinedOnDate;
 	@Column(name = "role")
 	private String role;
-	
-	// Getter and setter methods for userID
+
+    public User(User user) {
+        this.userID = user.userID;
+        this.fName = user.fName;
+        this.lName = user.lName;
+        this.email = user.email;
+        this.password = user.password;
+        this.address = user.address;
+        this.city = user.city;
+        this.province = user.province;
+        this.postal = user.postal;
+        this.country = user.country;
+        this.phoneNumber = user.phoneNumber;
+        this.companionPass = user.companionPass;
+        this.loungePass = user.loungePass;
+        this.joinedOnDate = user.joinedOnDate;
+        this.role = user.role;
+    }
+
+    public User() {
+
+    }
+
+    // Getter and setter methods for userID
 	public int getUserID() {
         return userID;
     }
