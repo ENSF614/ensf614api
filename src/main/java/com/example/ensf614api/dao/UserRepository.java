@@ -53,6 +53,4 @@ public interface UserRepository extends CrudRepository<User, Integer>{
     public List<AvailableCrew> getAvailablePilot();
 
 
-    public void AddCrew(@Param("flightId") Integer flightId, @Param("crewId") Integer crewId);
-
 }
