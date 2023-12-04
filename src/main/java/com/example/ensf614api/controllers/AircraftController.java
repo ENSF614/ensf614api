@@ -9,6 +9,7 @@ import com.example.ensf614api.stores.UserStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @CrossOrigin
 @RestController
@@ -17,6 +18,7 @@ public class AircraftController {
 
     private final AircraftStore aircraftStore;
 
+    @Autowired
     public AircraftController(AircraftStore aircraftStore){this.aircraftStore = aircraftStore;}
 
     @GetMapping("getAircraft")

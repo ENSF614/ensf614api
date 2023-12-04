@@ -5,6 +5,7 @@ import com.example.ensf614api.models.CrewAssignment;
 import com.example.ensf614api.stores.CrewAssignmentStore;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -12,9 +13,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/CrewAssignment")
 public class CrewAssignmentController {
+
     private final CrewAssignmentStore crewAssignmentStore;
 
-
+    @Autowired
     public CrewAssignmentController(CrewAssignmentStore crewAssignmentStore) {
         this.crewAssignmentStore = crewAssignmentStore;
     }
